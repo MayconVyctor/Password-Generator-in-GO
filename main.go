@@ -23,14 +23,22 @@ func generatePassword(input int) string {
 
 	allChars := lowerCase + upperCase + numbers + special
 
-	// mentory := make([] byte, 2) {
-	// 	lowerCase,
-	// }
+	mandatory := []byte{
+		upperCase[rand.Intn(len(upperCase))],
+		numbers[rand.Intn(len(numbers))],
+	}
 
-	password := make([]byte, input)
+	password := make([]byte, input-len(mandatory))
 
 	for i := range password {
 		password[i] = allChars[rand.Intn(len(allChars))]
 	}
+
+	password = append(password, mandatory...)
+
+	rand.Shuffle(len(password), func(i, j int) {
+		password[i], password[j] = password[j], password[i]
+	})
+
 	return string(password)
 }
