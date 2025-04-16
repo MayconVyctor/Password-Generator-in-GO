@@ -7,7 +7,7 @@ import (
 
 func main() {
 	var input int
-	fmt.Println("Enter the number of characters:")
+	fmt.Println("Enter the number of characters of you password:")
 	fmt.Scan(&input)
 	password := generatePassword(input)
 	fmt.Println(password)
@@ -15,19 +15,22 @@ func main() {
 }
 
 func generatePassword(input int) string {
-	chars := "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()+?><:{}[]"
 
-	// lowerCase := "abcdefghijklmnopqrstuvwxyz"
-	// upperCase := "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	// numbers := "0123456789"
-	// special := "!@#$%^&*()+?><:{}[]"
+	lowerCase := "abcdefghijklmnopqrstuvwxyz"
+	upperCase := "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	numbers := "0123456789"
+	special := "!@#$%^&*()+?><:{}[]"
 
-	// allchars := lowerCase, upperCase, numbers, special
+	allChars := lowerCase + upperCase + numbers + special
+
+	// mentory := make([] byte, 2) {
+	// 	lowerCase,
+	// }
 
 	password := make([]byte, input)
 
 	for i := range password {
-		password[i] = chars[rand.Intn(len(chars))]
+		password[i] = allChars[rand.Intn(len(allChars))]
 	}
 	return string(password)
 }
